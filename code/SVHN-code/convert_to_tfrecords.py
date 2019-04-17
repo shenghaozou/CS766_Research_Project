@@ -9,7 +9,7 @@ import random
 from PIL import Image
 import tensorflow as tf
 
-tf.app.flags.DEFINE_string('data_dir', None,
+tf.app.flags.DEFINE_string('data_dir', 'data',
                            'Directory to SVHN folders and write the converted files')
 FLAGS = tf.app.flags.FLAGS
 
@@ -154,7 +154,7 @@ def create_to_tfrecords_meta_file(num_test_examples, path_to_tfrecords_meta_file
     meta.num_test_examples = num_test_examples
     meta.save(path_to_tfrecords_meta_file)
 
-#def create_to_tfrecords_meta_file(num_train_examples, num_val_examples, num_test_examples,
+# def create_to_tfrecords_meta_file(num_train_examples, num_val_examples, num_test_examples,
 #                                  path_to_tfrecords_meta_file):
 #    print('Saving meta file to %s...' % (path_to_tfrecords_meta_file))
 #    meta = Meta()
@@ -166,25 +166,26 @@ def create_to_tfrecords_meta_file(num_test_examples, path_to_tfrecords_meta_file
 
 def main(_):
     path_to_train_dir = os.path.join(FLAGS.data_dir, 'train')
-    path_to_test_dir = os.path.join(FLAGS.data_dir, 'test')
     path_to_extra_dir = os.path.join(FLAGS.data_dir, 'extra')
+    path_to_test_dir = os.path.join(FLAGS.data_dir, 'generated')
+    
     path_to_train_digit_struct_mat_file = os.path.join(path_to_train_dir, 'digitStruct.mat')
-    path_to_test_digit_struct_mat_file = os.path.join(path_to_test_dir, 'digitStruct.mat')
     path_to_extra_digit_struct_mat_file = os.path.join(path_to_extra_dir, 'digitStruct.mat')
-
+    path_to_test_digit_struct_mat_file = os.path.join(path_to_test_dir, 'digitStruct.mat')
+    
     path_to_train_tfrecords_file = os.path.join(FLAGS.data_dir, 'train.tfrecords')
     path_to_val_tfrecords_file = os.path.join(FLAGS.data_dir, 'val.tfrecords')
-    path_to_test_tfrecords_file = os.path.join(FLAGS.data_dir, 'test.tfrecords')
+    path_to_test_tfrecords_file = os.path.join(FLAGS.data_dir, 'generated.tfrecords')
     path_to_tfrecords_meta_file = os.path.join(FLAGS.data_dir, 'meta.json')
 
     for path_to_file in [path_to_train_tfrecords_file, path_to_val_tfrecords_file, path_to_test_tfrecords_file]:
         assert not os.path.exists(path_to_file), 'The file %s already exists' % path_to_file
 
-   # print('Processing training and validation data...')
-   # [num_train_examples, num_val_examples] = convert_to_tfrecords(
-   #     [(path_to_train_dir, path_to_train_digit_struct_mat_file),
-   #      (path_to_extra_dir, path_to_extra_digit_struct_mat_file)],
-   #     [path_to_train_tfrecords_file, path_to_val_tfrecords_file], lambda paths: 0 if random.random() > 0.1 else 1)
+#     print('Processing training and validation data...')
+#     [num_train_examples, num_val_examples] = convert_to_tfrecords(
+#         [(path_to_train_dir, path_to_train_digit_struct_mat_file),
+#          (path_to_extra_dir, path_to_extra_digit_struct_mat_file)],
+#         [path_to_train_tfrecords_file, path_to_val_tfrecords_file], lambda paths: 0 if random.random() > 0.1 else 1)
 
     print('Processing test data...')
     [num_test_examples] = convert_to_tfrecords([(path_to_test_dir, path_to_test_digit_struct_mat_file)],

@@ -10,7 +10,7 @@ class Evaluator(object):
     def __init__(self, path_to_eval_log_dir):
         self.summary_writer = tf.summary.FileWriter(path_to_eval_log_dir)
 
-    def evaluate(self, path_to_checkpoint, path_to_tfrecords_file, num_examples, global_step):
+    def evaluate(self, path_to_checkpoint, path_to_tfrecords_file, num_examples, global_step, save_file):
         batch_size = 128
 
         num_batches = num_examples // batch_size
@@ -21,7 +21,7 @@ class Evaluator(object):
                                                                          num_example=num_examples,
                                                                          batch_size=batch_size,
                                                                          shuffled=False)
-            print(batch_size)
+            
             length_logits, digits_logits = Model.inference(image_batch, drop_rate=0.0)
             length_predictions = tf.argmax(length_logits, axis=1)
             digits_predictions = tf.argmax(digits_logits, axis=2)
@@ -75,7 +75,7 @@ class Evaluator(object):
             labels_total = np.array(labels_total)
             predictions_total = np.array(predictions_total)
             print(ids_total.shape, labels_total.shape, predictions_total.shape)
-            with open('result.txt', 'w') as f:
+            with open(save_file, 'w') as f:
                 f.write('ID\tprediction\tlabel\n')
                 for i in range(len(labels_total)):
                     f.write(str(ids_total[i])+'\t'+str(predictions_total[i])+'\t'+str(labels_total[i])+'\n')

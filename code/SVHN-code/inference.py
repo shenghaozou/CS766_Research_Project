@@ -38,10 +38,7 @@ def main(_):
                                                             digits_predictions_val[0][2],
                                                             digits_predictions_val[0][3],
                                                             digits_predictions_val[0][4])
-        #img = Image.open(path_to_image_file, 'r')
-        #plt.imshow(img)
-        #plt.title(title)
-        #plt.show()
+
         print('length: %d' % length_predictions_val[0])
         print('digits: %s'% digits_predictions_string_val[0])
 
