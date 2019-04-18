@@ -14,13 +14,15 @@ def main(_):
     path_to_restore_checkpoints = FLAGS.restore_checkpoints
 
     image = tf.image.decode_jpeg(tf.read_file(path_to_image_file), channels=3)
+    image = tf.image.convert_image_dtype(image, dtype=tf.float32)
+    image = tf.multiply(tf.subtract(image, 0.5), 2)
+    image = tf.reshape(image, [64, 64, 3])
     # image = tf.image.resize_images(image, [64, 64])
     # image = tf.reshape(image, [64, 64, 3])
     # image = tf.image.convert_image_dtype(image, dtype=tf.float32)
     # image = tf.multiply(tf.subtract(image, 0.5), 2)
-    # image = tf.image.resize_images(image, [54, 54])
-    # images = tf.reshape(image, [1, 54, 54, 3])
-    images = tf.reshape(image, [1, 64, 64, 3])
+    image = tf.image.resize_images(image, [54, 54])
+    images = tf.reshape(image, [1, 54, 54, 3])
 
     length_logits, digits_logits = Model.inference(images, drop_rate=0.0)
     length_predictions = tf.argmax(length_logits, axis=1)
@@ -40,9 +42,7 @@ def main(_):
                                                             digits_predictions_val[0][3],
                                                             digits_predictions_val[0][4])
 
-        print('length: %d' % length_predictions_val[0])
-        print('digits: %s'% digits_predictions_string_val[0])
-
+        print('length: %d, digits: %s' % (length_predictions_val[0], digits_predictions_string_val[0]))
 
 if __name__ == '__main__':
     tf.app.run(main=main)
