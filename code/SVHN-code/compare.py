@@ -3,6 +3,9 @@ standard = "label.txt"
 result = sys.argv[1]
 print("standard input: ", standard)
 print("compare input: ", result)
+limit = None
+if len(sys.argv) > 2:
+    limit = int(sys.argv[2])
 
 d = {}
 with open(standard) as fr:
@@ -15,6 +18,8 @@ total = 0
 with open(result) as fr:
     i = 1
     for line in fr:
+        if limit != None and i >= limit:
+            break
         tokens = line.split(' ')
         if i not in d:
             print("Can't find id {} in result".format(i))
