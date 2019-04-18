@@ -1,4 +1,6 @@
 import sys
+import json
+
 standard = "label.txt"
 result = sys.argv[1]
 print("standard input: ", standard)
@@ -15,6 +17,7 @@ with open(standard) as fr:
         d[int(id)] = tokens[1].strip()
 
 total = 0
+errorset = {}
 with open(result) as fr:
     i = 1
     for line in fr:
@@ -26,8 +29,10 @@ with open(result) as fr:
             continue
         if tokens[1].strip() != d[i]:
             print("id {} expected {} found {}".format(i, d[i], tokens[1].strip()))
+            errorset[i] = (i, d[i], tokens[1].strip())
         else:
             total += 1
         i += 1
-
+with open(result + '.info', 'w') as fw:
+    json.dump(errorset, fw)
 print("ACCURACY: ", total / len(d))
