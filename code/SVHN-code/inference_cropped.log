@@ -1,0 +1,37 @@
+WARNING:tensorflow:From /srv/home/jiefeng/CS766_Research_Project/code/SVHN-code/model.py:9: conv2d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d instead.
+WARNING:tensorflow:From /srv/home/jiefeng/anaconda3/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /srv/home/jiefeng/CS766_Research_Project/code/SVHN-code/model.py:10: batch_normalization (from tensorflow.python.layers.normalization) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.batch_normalization instead.
+WARNING:tensorflow:From /srv/home/jiefeng/CS766_Research_Project/code/SVHN-code/model.py:12: max_pooling2d (from tensorflow.python.layers.pooling) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.max_pooling2d instead.
+WARNING:tensorflow:From /srv/home/jiefeng/CS766_Research_Project/code/SVHN-code/model.py:74: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+WARNING:tensorflow:From /srv/home/jiefeng/CS766_Research_Project/code/SVHN-code/model.py:75: dropout (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dropout instead.
+2019-04-18 02:50:29.610521: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2019-04-18 02:50:29.630901: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2299885000 Hz
+2019-04-18 02:50:29.631909: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x561392afc6d0 executing computations on platform Host. Devices:
+2019-04-18 02:50:29.632569: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2019-04-18 02:50:29.828795: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x561392bb7400 executing computations on platform CUDA. Devices:
+2019-04-18 02:50:29.829542: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): GeForce GTX 1080, Compute Capability 6.1
+2019-04-18 02:50:29.831045: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: GeForce GTX 1080 major: 6 minor: 1 memoryClockRate(GHz): 1.8475
+pciBusID: 0000:84:00.0
+totalMemory: 7.93GiB freeMemory: 7.82GiB
+2019-04-18 02:50:29.831623: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2019-04-18 02:50:29.834837: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-04-18 02:50:29.835434: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2019-04-18 02:50:29.835998: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2019-04-18 02:50:29.837385: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 7604 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080, pci bus id: 0000:84:00.0, compute capability: 6.1)
+WARNING:tensorflow:From /srv/home/jiefeng/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/saver.py:1266: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+2019-04-18 02:50:31.829791: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
