@@ -27,9 +27,9 @@ with open(result) as fr:
         if i not in d:
             print("Can't find id {} in result".format(i))
             continue
-        if tokens[1].strip() != d[i]:
-            print("id {} expected {} found {}".format(i, d[i], tokens[1].strip()))
-            errorset[i] = (i, d[i], tokens[1].strip())
+        if tokens[2].strip() != d[i]:
+            print("id {} expected {} found {}".format(i, d[i], tokens[2].strip()))
+            errorset[i] = (i, d[i], tokens[2].strip())
         else:
             total += 1
         i += 1

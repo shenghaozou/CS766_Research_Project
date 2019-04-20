@@ -15,6 +15,8 @@ for k in d1:
 for k in d2:
     keys.add(k)
 
+d = {'+':0, '-':0, '*':0}
+
 for k in keys:
     exp = None
     id = None
@@ -24,13 +26,15 @@ for k in keys:
         id, exp, err1 = d1[k]
     if k in d2:
         id, exp, err2 = d2[k]
-
     if err1 == None:
         print("+ file 2 found extra error, id {} expected {} found {}".format(id, exp, err2))
+        d['+'] += 1
     elif err2 == None:
         print("- file 1 found extra error, id {} expected {} found {}".format(id, exp, err1))
+        d['-'] += 1
     elif err1 != err2:
+        d['*'] += 1
         print("* both files found different errors, id {} expected {} file 1 found {} file 2 found {}".format(id, exp, err1, err2))
 
-
+print(d)
 
