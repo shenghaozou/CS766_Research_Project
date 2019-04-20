@@ -16,5 +16,4 @@ output = 0.121779 + 0.959710*v  - 0.780245*s + sigmaMat;
 outputPixel = output;
 output = ordfilt2(output, 1, ones(r,r), 'symmetric');
 outputRegion = output;
-imwrite(outputRegion, 'res/vsFeature.jpg');
 end
