@@ -55,11 +55,6 @@ end
     if size(A,1)~=1
         A = max(A);     
     end
-    if isShowImg == 1
-        figure;
-%         imshow(ix);    
-        title('position of the atmospheric light');
-        imwrite(ix, 'res/position_of_the_atmospheric_light.png');    
-    end
+
 end
 

@@ -1,10 +1,8 @@
-func J = runDehazing(inputImage)
+function J = runDehazing(inputImage)
   I = inputImage;
   r = 10;
   beta = 1.0;
   % outputFolder = ['res/cross/' num2str(r) '_beta' num2str(beta)];
-  outputFolder = ['res/' num2str(r) '_beta' num2str(beta)];
-  mkdir(outputFolder);
   %----- Parameters for Guided Image Filtering -----
   gimfiltR = 60;
   eps = 10^-3;
@@ -15,33 +13,6 @@ func J = runDehazing(inputImage)
   %refineDR = imguidedfilter(dR, double(I)/255, 'NeighborhoodSize', [gimfiltR, gimfiltR], 'DegreeOfSmoothing', eps);
   tR = exp(-beta*refineDR);
   tP = exp(-beta*dP);
-
-  filename_depth = 'originalDepthMap.png';
-  fullname_depth = fullfile(outputFolder, filename_depth);
-  imwrite(dR, fullname_depth);
-  % imwrite(dR, 'res/originalDepthMap.png');
-  filename_refineD = 'refineDepthMap.png';
-  fullname_refineD = fullfile(outputFolder, filename_refineD);
-  imwrite(refineDR, fullname_refineD);
-  % imwrite(refineDR, 'res/refineDepthMap.png');
-
-  figure;
-  imshow([dP dR refineDR]);
-  title('depth maps');
-
-  figure;
-  imshow([tP tR]);
-  title('transmission maps');
-
-  filename_transmission = 'transmission.png';
-  fullname_transmission = fullfile(outputFolder, filename_transmission);
-  imwrite(tR, fullname_transmission);
-  % imwrite(tR, 'res/refined_transmission.png');
-  % add by Lin
-  filename_rawTransmission = 'raw_transmission.png';
-  fullname_rawTransmission = fullfile(outputFolder, filename_rawTransmission);
-  imwrite(tP, fullname_rawTransmission);
-  % imwrite(tP, 'res/raw_transmission.png');
 
   a = estA(I, dR);
   t0 = 0.05;
