@@ -20,7 +20,7 @@ def main(_):
     path_to_restore_checkpoints = 'Models/SVHN/tensorflow_model/model.ckpt-328000'
     
     model = Model()
-    images = tf.placeholder(dtype=tf.float32, shape=[1, 54, 54, 3])
+    images = tf.placeholder(dtype=tf.float32, shape=[None, 54, 54, 3])
     length_logits, digits_logits = model.inference(images, drop_rate=0.0)
     length_predictions = tf.argmax(length_logits, axis=1)
     digits_predictions = tf.argmax(digits_logits, axis=2)
