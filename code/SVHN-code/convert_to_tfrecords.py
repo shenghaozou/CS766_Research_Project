@@ -100,8 +100,10 @@ class ExampleReader(object):
                                                         center_y - max_side / 2.0,
                                                         max_side,
                                                         max_side)
-        image = np.array(ExampleReader._preprocess(Image.open(path_to_image_file), bbox_left, bbox_top, bbox_width,
-                                                   bbox_height)).tobytes()
+        # image = np.array(ExampleReader._preprocess(Image.open(path_to_image_file), bbox_left, bbox_top, bbox_width,
+        #                                            bbox_height)).tobytes()
+        
+        image = np.array(Image.open(path_to_image_file)).tobytes()
 
         example = tf.train.Example(features=tf.train.Features(feature={
             'id': ExampleReader._int64_feature(index+1),
@@ -154,14 +156,14 @@ def create_to_tfrecords_meta_file(num_test_examples, path_to_tfrecords_meta_file
     meta.num_test_examples = num_test_examples
     meta.save(path_to_tfrecords_meta_file)
 
-# def create_to_tfrecords_meta_file(num_train_examples, num_val_examples, num_test_examples,
-#                                  path_to_tfrecords_meta_file):
-#    print('Saving meta file to %s...' % (path_to_tfrecords_meta_file))
-#    meta = Meta()
-#    meta.num_train_examples = num_train_examples
-#    meta.num_val_examples = num_val_examples
-#    meta.num_test_examples = num_test_examples
-#    meta.save(path_to_tfrecords_meta_file)
+def create_to_tfrecords_meta_file(num_train_examples, num_val_examples, num_test_examples,
+                                 path_to_tfrecords_meta_file):
+   print('Saving meta file to %s...' % (path_to_tfrecords_meta_file))
+   meta = Meta()
+   meta.num_train_examples = num_train_examples
+   meta.num_val_examples = num_val_examples
+   meta.num_test_examples = num_test_examples
+   meta.save(path_to_tfrecords_meta_file)
 
 
 def main(_):
@@ -181,18 +183,18 @@ def main(_):
     for path_to_file in [path_to_train_tfrecords_file, path_to_val_tfrecords_file, path_to_test_tfrecords_file]:
         assert not os.path.exists(path_to_file), 'The file %s already exists' % path_to_file
 
-#     print('Processing training and validation data...')
-#     [num_train_examples, num_val_examples] = convert_to_tfrecords(
-#         [(path_to_train_dir, path_to_train_digit_struct_mat_file),
-#          (path_to_extra_dir, path_to_extra_digit_struct_mat_file)],
-#         [path_to_train_tfrecords_file, path_to_val_tfrecords_file], lambda paths: 0 if random.random() > 0.1 else 1)
+    print('Processing training and validation data...')
+    [num_train_examples, num_val_examples] = convert_to_tfrecords(
+        [(path_to_train_dir, path_to_train_digit_struct_mat_file),
+         (path_to_extra_dir, path_to_extra_digit_struct_mat_file)],
+        [path_to_train_tfrecords_file, path_to_val_tfrecords_file], lambda paths: 0 if random.random() > 0.1 else 1)
 
     print('Processing test data...')
     [num_test_examples] = convert_to_tfrecords([(path_to_test_dir, path_to_test_digit_struct_mat_file)],
                                                [path_to_test_tfrecords_file], lambda x: 0)
 
-    # create_to_tfrecords_meta_file(num_train_examples, num_val_examples, num_test_examples, path_to_tfrecords_meta_file)
-    create_to_tfrecords_meta_file(num_test_examples, path_to_tfrecords_meta_file)
+    create_to_tfrecords_meta_file(num_train_examples, num_val_examples, num_test_examples, path_to_tfrecords_meta_file)
+    # create_to_tfrecords_meta_file(num_test_examples, path_to_tfrecords_meta_file)
 
     print('Done')
 
