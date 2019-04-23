@@ -29,7 +29,7 @@ def _train(path_to_train_tfrecords_file, num_train_examples, path_to_val_tfrecor
     num_steps_to_check = 2000
 
     with tf.Graph().as_default():
-        image_batch, length_batch, digits_batch = Donkey.build_batch(path_to_train_tfrecords_file,
+        id_batch, image_batch, length_batch, digits_batch = Donkey.build_batch(path_to_train_tfrecords_file,
                                                                      num_example=num_train_examples,
                                                                      batch_size=batch_size,
                                                                      shuffled=True)
